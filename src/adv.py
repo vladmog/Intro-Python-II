@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -39,6 +40,8 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+vlad = Player("Vlad", room['outside'])
+
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +52,46 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+quit = False
+
+while not quit:
+    print(f"\n{vlad.name}, \nYou're in in the {vlad.location.name}")
+    print(vlad.location.description)
+    print("\nWhere do you want to go?")
+    command = input("\n(N)orth\n(S)outh\n(E)ast\n(W)est\n\nCommand: ")
+     # _.strip() removes leading/trailing spaces
+    command = command.lower().strip()
+    
+    # `continue` returns execution of code back to start of loop
+    if command == '':
+        continue
+
+    if command == 'n':
+        try:
+            vlad.location = vlad.location.n_to
+        except:
+            print("\n\nLet's not go there...")
+        
+    if command == 's':
+        try:
+            vlad.location = vlad.location.s_to
+        except:
+            print("\n\nLet's not go there...")
+        
+    if command == 'e':
+        try:
+            vlad.location = vlad.location.e_to
+        except:
+            print("\n\nLet's not go there...")
+
+    if command == 'w':
+        try:
+            vlad.location = vlad.location.w_to
+        except:
+            print("\n\nLet's not go there...")
+
+    if command == 'q':
+        quit = True
+
+
